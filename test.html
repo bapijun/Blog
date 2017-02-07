@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title>Untitled
+        </title>
+        <script>
+        	window.onload = function() {
+        		var childs = document.getElementById("container").childNodes;
+        		for (var i = 0;i < childs.length;i++) {
+        			if (childs[i].tagName == "LI") {
+        				addEvent(childs[i]);
+        			}
+        		}
+        	}
+        	function addEvent(o) {
+        		var as = o.getElementsByTagName("a");
+        		as[0].onclick = function(e){
+        			var theEvent = window.event || e;
+        			var link = theEvent.srcElement ? theEvent.srcElement : theEvent.target;
+        			var uls  = link.parentNode.childNodes;
+	        		for (var i = 0;i < uls.length;i++) {
+	        			if (uls[i].tagName == "UL") {
+	        				if (uls[i].style.display == "none") {
+	        					uls[i].style.display = "";
+	        				} else {
+	        					uls[i].style.display = "none";
+	        				}
+	        			}
+	        		}
+        		}
+        	}
+        </script>
+    </head>
+    <body>
+        <ul id="container">
+            <li>
+            	<a href="#">Menu01</a>
+            	<ul>
+            		<li>A1</li>
+            		<li>A2</li>
+            	</ul>
+            </li>
+            <li>
+            	<a href="#">Menu02</a>
+            	<ul>
+            		<li>B1</li>
+            		<li>B2</li>
+            	</ul>
+            </li>
+        </ul>
+    </body>
+</html>
+

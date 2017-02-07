@@ -1,3 +1,19 @@
+<?php
+  require_once('connectvars.php');
+  //start the session
+  session_start();
+
+  if(isset($_SESSION['user_id'])) {//Check if you are logged in
+    $user_id = $_SESSION['user_id'];
+    $user_name = $_SESSION['username'];
+  }
+  else {//if not logged in,try to log in
+    $home_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/login.php';
+    header('Location: ' . $home_url);
+  }
+
+?>
+
 <!DOCTYPE HTML>
 <html>
 
@@ -6,21 +22,37 @@
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/index_style.css" />
   <!-- modernizr enables HTML5 elements and feature detects -->
   <script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery.easing-sooper.js"></script>
+  <script type="text/javascript" src="js/jquery.sooperfish.js"></script>
+  <script type="text/javascript" src="js/image_fade.js"></script>
+  <script type="text/javascript" src="js/username.js"></script>
+ 
 </head>
 
 <body>
   <div id="main">
     <header>
+    
+      <ul id="loginname"> 
+            <li>
+              <a href="#"><?php echo $user_name; ?> </a>
+              <ul  style="display: none;">
+                <li><a href="logout.php" >log out</a></li>
+              </ul>
+            </li>
+      </ul>
+    
       <div id="logo">
         <!-- class="logo_colour", allows you to change the colour of the text -->
-        <h1><a href="index.html">bapijun's blog<span class="logo_colour"></span></a></h1>
+        <h1><a><?php echo $user_name; ?>'s blog<span class="logo_colour"></span></a></h1>
       </div>
       <nav>
         <ul class="sf-menu" id="nav">
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.php">Home</a></li>
           <li><a href="examples.html">Examples</a></li>
           <li><a href="page.html">A Page</a></li>
           <li><a href="another_page.html">Another Page</a></li>
@@ -41,7 +73,7 @@
               <li><a href="#">Drop Down Five</a></li>
             </ul>
           </li>
-          <li><a href="contact.php">Contact Us</a></li>
+          <li><a href="contact.php">HomePage</a></li>
         </ul>
       </nav>
     </header>
@@ -80,16 +112,13 @@
     </div>
     <footer>
       <p><a href="index.html">Home</a> | <a href="examples.html">Examples</a> | <a href="page.html">A Page</a> | <a href="another_page.html">Another Page</a> | <a href="contact.php">Contact Us</a></p>
-      <p>Copyright &copy; CSS3_style | Photos by <a href="#">Fotogrph</a> | <a href="http://www.cssmoban.com">模板之家</a></p>
+      <p>Copyright &copy; bapijun | Photos by <a href="#">Fotogrph</a></p>
     </footer>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
   </div>
   <!-- javascript at the bottom for fast page loading -->
-  <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/jquery.easing-sooper.js"></script>
-  <script type="text/javascript" src="js/jquery.sooperfish.js"></script>
-  <script type="text/javascript" src="js/image_fade.js"></script>
+
   <script type="text/javascript">
     $(document).ready(function() {
       $('ul.sf-menu').sooperfish();
