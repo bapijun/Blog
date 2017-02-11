@@ -40,3 +40,32 @@ div[data-role="editor-toolbar"] {
 .dropdown-menu a {
   cursor: pointer;
 }
+
+.inputac {
+    font-size: 8px;
+    color: black;
+}
+.articleac {
+    font-size: 12px;
+    color: black;
+}
+.subtitle {
+  padding: 12px 4px 2px 4px;
+  color: #999;
+  font-weight: bold;
+  border-bottom: solid 1px #f5f5f5;
+  clear: both;
+  font-size: 8px;
+}
+.type_sub {
+  padding: 1px 4px 2px 1px;
+  margin: 10px 1px 1px 1px;
+  color: #999;
+  font-weight: bold;
+  border-bottom: solid 1px #f5f5f5;
+  clear: both;
+  font-size: 8px;
+}
+#article_type {
+  font-size: 8px;
+}
