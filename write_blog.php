@@ -5,6 +5,12 @@
   //wait for log in
   $user_id = "15";
   $user_name = "bapijun";
+  $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+  if(!$dbc) {
+    die("Can't connect the database;");
+  }
+  else {
 
 
 ?>
@@ -64,7 +70,7 @@
         <option value="2">转载</option>
         <option value="3">翻译</option>
       </select>
-      <input type="text" id="Title" style="width:560px; height:20px;" maxlength="100">
+      <input type="texTitle" id="Title" style="width:560px; height:20px;" maxlength="100">
     </div>
   </div>
 
@@ -136,33 +142,45 @@
       </div>
     <div id="typed">
       <table id="typet">
-        <tr>
-          <td>
-            <input id="chk_type_0" type="checkbox">
-            <label for='chk_type_0'>移动开发</label>
-          </td>
-          <td>
-            <input id="chk_type_0" type="checkbox">
-            <label for='chk_type_0'>移动开发</label>
-          </td>
-          <td>
-            <input id="chk_type_0" type="checkbox">
-            <label for='chk_type_0'>移动开发</label>
-          </td>
-          <td>
-            <input id="chk_type_0" type="checkbox">
-            <label for='chk_type_0'>移动开发</label>
-          </td>
-          <td>
-            <input id="chk_type_0" type="checkbox">
-            <label for='chk_type_0'>移动开发</label>
-          </td>
-        </tr>
+<?php
+  $query = "SELECT type_name FROM article_type ORDER BY id";
+  $data = mysqli_query($dbc, $query);
+  $i = 0;
+  while($row = mysqli_fetch_array($data))
+  {
+    if($i%5 == 0) {
+      echo "<tr>";
+    }
+    
+    echo "<td>";
+    echo "<input id='chk_type_" . $i . "' type='checkbox' >";
+    echo "</td> <td>";
+    echo " <label for='chk_type_" . $i . "' class='type_lable'>";
+    echo $row['type_name'] . "</label> </td>";
+    if($i!=1 && ($i+1)%5 == 0) {
+      echo "</tr>";
+    }
+      
+    $i++;
+  }
+   echo "</tr>";
+?>
       </table>
       
     </div>
 
+    <div class="subtitle">
+      摘要：（默认自动提取您文章的前200字显示在博客首页作为文章摘要，您也可以在这里自行编辑 ）
+    </br>
+      <textarea id="texsummary" rows="6" style="width:99%;"></textarea>
     </div>
+    <div class="btn_table">
+      <input id="btnPublish" type="button" class="btn" value="发表文章" title="保存并跳转">
+      <input id="btnPublish" type="button" class="btn" value="保存文章" title="保存并留在当前页">
+      <input id="btnPublish" type="button" class="btn" value="存入草稿箱" title="保存并跳转">
+      <input id="btnPublish" type="button" class="btn" value="舍弃" title="舍弃并跳转">
+    </div>
+  
   </div>
 
 
@@ -225,4 +243,8 @@
  </script>
 
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<?php 
+  }//end of else of if(!$dbc)
+?>
 </html>

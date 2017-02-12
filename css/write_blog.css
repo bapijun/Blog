@@ -66,6 +66,20 @@ div[data-role="editor-toolbar"] {
   clear: both;
   font-size: 8px;
 }
+
 #article_type {
   font-size: 8px;
 }
+
+.type_lable {
+  width: 80px;
+  margin : 0px 0px 0px 0px;
+  padding-right: 40px;
+
+}
+
+.btn_table {
+  text-align:center;
+  margin-top:  10px;
+}
+
